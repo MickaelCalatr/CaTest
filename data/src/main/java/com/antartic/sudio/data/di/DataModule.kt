@@ -47,14 +47,14 @@ object DataModule {
         retrofit: Retrofit,
         gson: Gson
     ): BankRemoteDataSource {
-        return if (BuildConfig.FLAVOR == "mock") {
-            retrofit.create(BankRemoteDataSource::class.java)
-        } else {
+        return if (BuildConfig.IS_MOCK) {
             BankMockDataSource(context, gson)
+        } else {
+            retrofit.create(BankRemoteDataSource::class.java)
         }
     }
 
-    @Binds
+    @Provides
     fun provideBankRepository(
         bankDataSource: BankRemoteDataSource
     ): BankRepository {

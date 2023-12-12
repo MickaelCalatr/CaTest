@@ -8,6 +8,7 @@ plugins {
 android {
     namespace = "com.antartic.sudio.catest"
     compileSdk = 34
+    buildToolsVersion = "34.0.0"
 
     defaultConfig {
         applicationId = "com.antartic.sudio.catest"
@@ -25,9 +26,11 @@ android {
     productFlavors {
         create("mock") {
             dimension = "environment"
+            buildConfigField("boolean", "IS_MOCK", "true")
         }
         create("prod") {
             dimension = "environment"
+            buildConfigField("boolean", "IS_MOCK", "false")
         }
     }
     buildTypes {
@@ -43,14 +46,14 @@ android {
             )
         }
     }
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
-    buildToolsVersion = "34.0.0"
 }
 
 dependencies {
@@ -69,6 +72,10 @@ dependencies {
     implementation("com.jakewharton.timber:timber:5.0.1")
 
     testImplementation("junit:junit:4.13.2")
+
+    // MokK
+    testImplementation("io.mockk:mockk:1.13.8")
+    testImplementation("io.mockk:mockk-agent-jvm:1.13.8")
 }
 
 // Allow references to generated code
