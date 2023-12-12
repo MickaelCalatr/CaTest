@@ -16,3 +16,5 @@ dependencyResolutionManagement {
 rootProject.name = "CA Test"
 include(":app")
 include(":data")
+include(":domain")
+include(":core")
