@@ -4,6 +4,9 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
 }
+apply {
+    from("../flavor.gradle")
+}
 
 android {
     namespace = "com.antartic.sudio.catest"
@@ -18,20 +21,6 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-    buildFeatures {
-        buildConfig = true
-    }
-    flavorDimensions += "environment"
-    productFlavors {
-        create("mock") {
-            dimension = "environment"
-            buildConfigField("boolean", "IS_MOCK", "true")
-        }
-        create("prod") {
-            dimension = "environment"
-            buildConfigField("boolean", "IS_MOCK", "false")
-        }
     }
     buildTypes {
         debug {

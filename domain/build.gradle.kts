@@ -3,14 +3,15 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
-
+apply {
+    from("../flavor.gradle")
+}
 android {
     namespace = "com.antartic.sudio.domain"
     compileSdk = 34
-
+    buildToolsVersion = "34.0.0"
     defaultConfig {
-        minSdk = 24
-
+        minSdk = 26
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -24,15 +25,6 @@ android {
             )
         }
     }
-    flavorDimensions += "environment"
-    productFlavors {
-        create("mock") {
-            dimension = "environment"
-        }
-        create("prod") {
-            dimension = "environment"
-        }
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -43,6 +35,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core"))
     implementation(project(":data"))
     // Dagger-Hilt
     implementation("com.google.dagger:hilt-android:2.48")

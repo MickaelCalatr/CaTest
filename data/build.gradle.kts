@@ -3,33 +3,19 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
+apply {
+    from("../flavor.gradle")
+}
 
 android {
     namespace = "com.antartic.sudio.data"
     compileSdk = 34
     buildToolsVersion = "34.0.0"
-
     defaultConfig {
-        minSdk = 24
+        minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
-    }
-    buildFeatures {
-        buildConfig = true
-    }
-    flavorDimensions += "environment"
-    productFlavors {
-        create("mock") {
-            dimension = "environment"
-            buildConfigField("boolean", "IS_MOCK", "true")
-            buildConfigField("String", "BANK_BASE_URL", "\"https://cdf-test-mobile-default-rtdb.europe-west1.firebasedatabase.app\"")
-        }
-        create("prod") {
-            dimension = "environment"
-            buildConfigField("boolean", "IS_MOCK", "false")
-            buildConfigField("String", "BANK_BASE_URL", "\"https://cdf-test-mobile-default-rtdb.europe-west1.firebasedatabase.app\"")
-        }
     }
     buildTypes {
         release {
@@ -40,7 +26,6 @@ android {
             )
         }
     }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11

@@ -1,6 +1,7 @@
 package com.antartic.sudio.data.di
 
 import android.content.Context
+import com.antartic.sudio.core.IoDispatcher
 import com.antartic.sudio.data.BuildConfig
 import com.antartic.sudio.data.repository.BankRepository
 import com.antartic.sudio.data.repository.BankRepositoryImpl
@@ -14,6 +15,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -56,8 +58,9 @@ object DataModule {
 
     @Provides
     fun provideBankRepository(
-        bankDataSource: BankRemoteDataSource
+        bankDataSource: BankRemoteDataSource,
+        @IoDispatcher dispatcher: CoroutineDispatcher
     ): BankRepository {
-        return BankRepositoryImpl(bankDataSource)
+        return BankRepositoryImpl(bankDataSource, dispatcher)
     }
 }
