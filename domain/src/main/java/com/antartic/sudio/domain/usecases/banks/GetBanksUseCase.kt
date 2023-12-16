@@ -18,9 +18,15 @@ class GetBanksUseCase @Inject constructor(
     private val bankRepository: BankRepository,
     @DefaultDispatcher private val dispatcher: CoroutineDispatcher
 ) {
+    data class BanksList(
+        val caBanks: List<BankData>?,
+        val otherBanks: List<BankData>?
+    )
+
     data class BankData(
         val name: String,
         val isCA: Boolean,
+        val balance: String,
         val accounts: List<AccountData>
     )
 
@@ -30,11 +36,15 @@ class GetBanksUseCase @Inject constructor(
         val balance: String,
     )
 
-    operator fun invoke(): Flow<List<BankData>> {
+    operator fun invoke(): Flow<BanksList> {
         return bankRepository.getBanks().map { banks ->
-            banks.banks.map { bank ->
+            val result = banks.banks.map { bank ->
                 convert(bank)
             }
+            BanksList(
+                caBanks = result.filter { it.isCA }.sortedBy { it.name },
+                otherBanks = result.filter { !it.isCA }.sortedBy { it.name }
+            )
         }.flowOn(dispatcher)
     }
 
@@ -43,7 +53,9 @@ class GetBanksUseCase @Inject constructor(
         BankData(
             name = data.name,
             isCA = data.isCA == 1,
-            accounts = data.accounts.sortedBy { it.order }.map { convert(it) }
+            balance = "${data.accounts.sumOf { it.balance.toDouble() }.toFloat()} €",
+            accounts = data.accounts.sortedBy { it.label }
+                .map { convert(it) }
         )
     }
 
@@ -52,7 +64,7 @@ class GetBanksUseCase @Inject constructor(
         AccountData(
             id = data.id,
             label = data.label,
-            balance = data.balance
+            balance = "${data.balance} €"
         )
     }
 }

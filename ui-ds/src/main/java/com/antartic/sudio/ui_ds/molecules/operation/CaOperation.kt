@@ -17,7 +17,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.antartic.sudio.ui_ds.theme.CATheme
 import com.antartic.sudio.ui_ds.theme.bold14
-import com.antartic.sudio.ui_ds.theme.margin12
 import com.antartic.sudio.ui_ds.theme.margin16
 import com.antartic.sudio.ui_ds.theme.margin40
 import com.antartic.sudio.ui_ds.theme.margin8
@@ -26,10 +25,10 @@ import com.antartic.sudio.ui_ds.theme.regular14
 
 
 @Composable
-fun CaAccountTitle(
+fun CaOperationTitle(
     modifier: Modifier = Modifier,
     operationName: String,
-    amount: String,
+    balance: String,
     date: String
 ) {
     Column(
@@ -67,7 +66,7 @@ fun CaAccountTitle(
             }
             Text(
                 modifier = Modifier.padding(end = margin40()),
-                text = amount,
+                text = balance,
                 style = regular14(),
                 color = MaterialTheme.colorScheme.onSecondaryContainer
             )
@@ -85,9 +84,9 @@ fun CaAccountTitle(
 @Composable
 private fun Preview() {
     CATheme {
-        CaAccountTitle(
+        CaOperationTitle(
             operationName = "Restaurant Via Pilat",
-            amount = "13450,50 €",
+            balance = "13450,50 €",
             date = "24/12/2023"
         )
     }

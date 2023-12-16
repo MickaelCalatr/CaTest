@@ -6,6 +6,7 @@ import com.antartic.sudio.data.source.remote.BankRemoteDataSource
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.lang.NullPointerException
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -16,7 +17,7 @@ class BankMockDataSource @Inject constructor(
 ) : BankRemoteDataSource {
 
     companion object {
-        private const val BANKS_FILE = "banks.json"
+        private const val BANKS_FILE = "data/banks.json"
     }
 
     private inline fun <reified T> Gson.fromJson(json: String): T =

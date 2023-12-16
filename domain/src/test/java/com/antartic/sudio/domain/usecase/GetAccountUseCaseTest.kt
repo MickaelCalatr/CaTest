@@ -45,7 +45,7 @@ class GetAccountUseCaseTest {
             coVerify { bankRepository.getBankAccount("bankName", "accountId") }
             assertThat(it).isNotNull
             assertThat(it!!.id).isEqualTo(mock.id)
-            assertThat(it.balance).isEqualTo(mock.balance)
+            assertThat(it.balance).isEqualTo("${mock.balance} €")
             assertThat(it.label).isEqualTo(mock.label)
         }
     }
@@ -81,7 +81,7 @@ class GetAccountUseCaseTest {
             val result = getAccountUseCase.convert(mock)
 
             assertThat(result.id).isEqualTo(mock.id)
-            assertThat(result.balance).isEqualTo(mock.balance)
+            assertThat(result.balance).isEqualTo("${mock.balance} €")
             assertThat(result.label).isEqualTo(mock.label)
             assertThat(result.operations).hasSize(mock.operations.size)
         }

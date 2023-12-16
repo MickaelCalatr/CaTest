@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CA Test</string>
+    <string name="my_accounts">Mes Comptes</string>
+    <string name="ca_bank_title">Credit Agricole</string>
+    <string name="other_bank_title">Autres Banques</string>
+    <string name="error_occurred">Une erreur s\'est produite</string>
+
+</resources>

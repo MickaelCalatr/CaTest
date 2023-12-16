@@ -41,12 +41,17 @@ class GetBanksUseCaseTest {
     @Test
     fun getBanksUseCase_test() = runBlocking {
         val mock = mockk<BankList>()
-        val bankMock = mockk<Bank>(relaxed = true)
-        every { mock.banks } returns listOf(bankMock, bankMock, bankMock)
+        val caBankMock = mockk<Bank>(relaxed = true)
+        every { caBankMock.isCA } returns 1
+        val otherBankMock = mockk<Bank>(relaxed = true)
+        every { otherBankMock.isCA } returns 0
+
+        every { mock.banks } returns listOf(caBankMock, otherBankMock, caBankMock)
         coEvery { bankRepository.getBanks() } returns flowOf(mock)
         getBanksUseCase().collect {
             coVerify { bankRepository.getBanks() }
-            assertThat(it).hasSize(3)
+            assertThat(it.caBanks).hasSize(2)
+            assertThat(it.otherBanks).hasSize(1)
         }
     }
 
@@ -71,7 +76,7 @@ class GetBanksUseCaseTest {
             val result = getBanksUseCase.convert(mock)
 
             assertThat(result.id).isEqualTo(mock.id)
-            assertThat(result.balance).isEqualTo(mock.balance)
+            assertThat(result.balance).isEqualTo("${mock.balance} €")
             assertThat(result.label).isEqualTo(mock.label)
         }
     }

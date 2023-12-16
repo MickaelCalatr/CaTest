@@ -25,7 +25,7 @@ private fun getDarkColors() = darkColorScheme(
     primaryContainer = neutral900,
     secondaryContainer = neutral800,
     tertiaryContainer = neutral300,
-    onPrimaryContainer = neutral100,
+    onPrimaryContainer = neutral200,
     onSecondaryContainer = neutral300,
     onTertiaryContainer = black,
 
@@ -42,14 +42,14 @@ private fun getLightColors() = lightColorScheme(
     tertiary = secondary,
     onTertiary = white,
 
-    surface = white,
+    surface = neutral100,
     onSurface = neutral1000,
     inverseSurface = neutral1000,
     inverseOnSurface = white,
 
-    primaryContainer = neutral100,
-    secondaryContainer = neutral300,
-    tertiaryContainer = neutral800,
+    primaryContainer = white,
+    secondaryContainer = neutral200,
+    tertiaryContainer = neutral300,
     onPrimaryContainer = neutral1000,
     onSecondaryContainer = neutral800,
     onTertiaryContainer = neutral300,

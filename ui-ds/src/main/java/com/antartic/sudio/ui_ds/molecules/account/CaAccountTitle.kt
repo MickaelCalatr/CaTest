@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,7 +30,7 @@ import com.antartic.sudio.ui_ds.theme.regular14
 fun CaAccountTitle(
     modifier: Modifier = Modifier,
     accountName: String,
-    amount: String,
+    balance: String,
     onClick: () -> Unit
 ) {
     Column(
@@ -49,23 +50,23 @@ fun CaAccountTitle(
                 modifier = Modifier.weight(1f),
                 text = accountName,
                 style = regular14(),
-                color = MaterialTheme.colorScheme.onPrimaryContainer
+                color = MaterialTheme.colorScheme.onTertiaryContainer
             )
             Text(
-                text = amount,
+                text = balance,
                 style = regular14(),
-                color = MaterialTheme.colorScheme.onSecondaryContainer
+                color = MaterialTheme.colorScheme.secondaryContainer
             )
             Icon(
                 modifier = Modifier.width(iconSize20()),
                 painter = painterResource(R.drawable.ic_arrow_right),
-                tint = MaterialTheme.colorScheme.onSecondaryContainer,
+                tint = MaterialTheme.colorScheme.secondaryContainer,
                 contentDescription = "Account Icon"
             )
         }
         Divider(
             thickness = 1.dp,
-            color = MaterialTheme.colorScheme.onSecondaryContainer
+            color = MaterialTheme.colorScheme.secondaryContainer
         )
     }
 
@@ -76,10 +77,12 @@ fun CaAccountTitle(
 @Composable
 private fun Preview() {
     CATheme {
-        CaAccountTitle(
-            accountName = "Credit Agricole PEL",
-            amount = "13450,50 €",
-            onClick = {}
-        )
+        Surface {
+            CaAccountTitle(
+                accountName = "Credit Agricole PEL",
+                balance = "13450,50 €",
+                onClick = {}
+            )
+        }
     }
 }

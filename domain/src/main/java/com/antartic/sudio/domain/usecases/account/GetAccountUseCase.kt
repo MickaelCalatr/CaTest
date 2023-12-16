@@ -57,7 +57,7 @@ class GetAccountUseCase @Inject constructor(
         AccountData(
             id = data.id,
             label = data.label,
-            balance = data.balance,
+            balance = "${data.balance} €",
             operations = data.operations.map { convert(it) }
         )
     }

@@ -19,7 +19,7 @@ data class Account(
     @SerializedName("product_code")
     val productCode: String,
     @SerializedName("balance")
-    val balance: String,
+    val balance: Float,
     @SerializedName("operations")
     val operations: List<Operation>
 )
