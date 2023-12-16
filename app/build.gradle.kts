@@ -56,9 +56,6 @@ dependencies {
     implementation(project(":ui-ds"))
 
     implementation("androidx.core:core-ktx:1.9.0")
-    // Kotlin
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.10")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.10")
     // Integration with ViewModels
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
