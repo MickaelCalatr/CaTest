@@ -42,6 +42,13 @@ fun regular12() = TextStyle(
 
 
 @Composable
+fun bold40() = TextStyle(
+    fontWeight = FontWeight.Bold,
+    color = MaterialTheme.colorScheme.onPrimaryContainer,
+    fontSize = 40.sp
+)
+
+@Composable
 fun bold22() = TextStyle(
     fontWeight = FontWeight.Bold,
     color = MaterialTheme.colorScheme.onPrimaryContainer,

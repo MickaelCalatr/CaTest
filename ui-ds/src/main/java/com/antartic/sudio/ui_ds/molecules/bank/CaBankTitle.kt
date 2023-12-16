@@ -9,12 +9,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -26,23 +23,23 @@ import com.antartic.sudio.ui_ds.theme.iconSize16
 import com.antartic.sudio.ui_ds.theme.margin12
 import com.antartic.sudio.ui_ds.theme.margin16
 import com.antartic.sudio.ui_ds.theme.margin8
+import com.antartic.sudio.ui_ds.theme.regular14
 import com.antartic.sudio.ui_ds.theme.regular16
-
 
 @Composable
 fun CaBankTitle(
     modifier: Modifier = Modifier,
     accountName: String,
-    amount: String,
-    onClick: (Boolean) -> Unit
+    balance: String,
+    isCollapsed: Boolean,
+    onClick: () -> Unit,
+    collapseContent: @Composable () -> Unit
 ) {
-    var isOpen by remember { mutableStateOf(false) }
-
     Column(
         modifier = modifier
+            .padding(start = margin8())
             .clickable {
-                isOpen = !isOpen
-                onClick(isOpen)
+                onClick()
             }
     ) {
         Row(
@@ -56,31 +53,32 @@ fun CaBankTitle(
         ) {
             Text(
                 modifier = Modifier.weight(1f),
-                style = regular16(),
+                style = regular14(),
                 text = accountName,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
             Text(
                 modifier = Modifier.padding(horizontal = margin12()),
-                text = amount,
-                style = regular16(),
-                color = MaterialTheme.colorScheme.onSecondaryContainer
+                text = balance,
+                style = regular14(),
+                color = MaterialTheme.colorScheme.secondaryContainer
             )
             Icon(
                 modifier = Modifier.width(iconSize16()),
                 painter = painterResource(
-                    if (isOpen) R.drawable.ic_arrow_up
-                    else R.drawable.ic_arrow_down
+                    if (isCollapsed) R.drawable.ic_arrow_down
+                    else R.drawable.ic_arrow_up
                 ),
-                tint = MaterialTheme.colorScheme.onSecondaryContainer,
+                tint = MaterialTheme.colorScheme.secondaryContainer,
                 contentDescription = "Bank Icon"
             )
         }
-        if (isOpen) {
+        if (!isCollapsed) {
             Divider(
                 thickness = 1.dp,
-                color = MaterialTheme.colorScheme.onSecondaryContainer
+                color = MaterialTheme.colorScheme.secondaryContainer
             )
+            collapseContent()
         }
     }
 
@@ -91,10 +89,14 @@ fun CaBankTitle(
 @Composable
 private fun Preview() {
     CATheme {
-        CaBankTitle(
-            accountName = "Credit Agricole",
-            amount = "13450,50 €",
-            onClick = {}
-        )
+        Surface {
+            CaBankTitle(
+                accountName = "Credit Agricole",
+                balance = "13450,50 €",
+                isCollapsed = true,
+                onClick = {},
+                collapseContent = {}
+            )
+        }
     }
 }
