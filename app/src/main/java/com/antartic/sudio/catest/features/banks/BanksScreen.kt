@@ -24,6 +24,7 @@ import com.antartic.sudio.catest.R
 import com.antartic.sudio.domain.usecases.banks.GetBanksUseCase
 import com.antartic.sudio.ui_ds.atoms.loader.CALoader
 import com.antartic.sudio.ui_ds.atoms.text.CABankTitleText
+import com.antartic.sudio.ui_ds.atoms.text.CaErrorPlaceholder
 import com.antartic.sudio.ui_ds.molecules.account.CaAccountTitle
 import com.antartic.sudio.ui_ds.molecules.bank.CaBankTitle
 import com.antartic.sudio.ui_ds.theme.CATheme
@@ -41,7 +42,7 @@ fun BanksRoute(
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
     BanksScreen(
-        uiState.value,
+        uiState = uiState.value,
         navigateToAccount = navigateToAccount,
     )
 }
@@ -67,14 +68,7 @@ fun BanksScreen(
         )
         when (uiState) {
             BanksUiState.Loading -> CALoader(modifier = Modifier.fillMaxSize())
-            BanksUiState.Error -> Text(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(margin28()),
-                text = stringResource(R.string.error_occurred),
-                color = MaterialTheme.colorScheme.onBackground,
-                style = bold22()
-            )
+            BanksUiState.Error -> CaErrorPlaceholder(stringResource(R.string.error_occurred))
             is BanksUiState.Result -> LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
@@ -88,7 +82,12 @@ fun BanksScreen(
                         items = uiState.data.caBanks!!,
                         key = { it.name + it.accounts }
                     ) {
-                        BankSection(it)
+                        BankSection(
+                            bank = it,
+                            onItemClick = { id ->
+                                navigateToAccount(it.name, id)
+                            }
+                        )
                     }
                 }
                 if (!uiState.data.otherBanks.isNullOrEmpty()) {
@@ -99,7 +98,12 @@ fun BanksScreen(
                         items = uiState.data.otherBanks!!,
                         key = { it.name + it.accounts }
                     ) {
-                        BankSection(it)
+                        BankSection(
+                            bank = it,
+                            onItemClick = { id ->
+                                navigateToAccount(it.name, id)
+                            }
+                        )
                     }
                 }
             }
@@ -109,7 +113,8 @@ fun BanksScreen(
 
 @Composable
 private fun BankSection(
-    bank: GetBanksUseCase.BankData
+    bank: GetBanksUseCase.BankData,
+    onItemClick: (String) -> Unit
 ) {
     var isCollapse by remember { mutableStateOf(true) }
 
@@ -126,7 +131,7 @@ private fun BankSection(
                     accountName = it.label,
                     balance = it.balance,
                     onClick = {
-
+                        onItemClick(it.id)
                     }
                 )
             }

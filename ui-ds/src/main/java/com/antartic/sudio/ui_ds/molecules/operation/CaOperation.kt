@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,8 +29,8 @@ import com.antartic.sudio.ui_ds.theme.regular14
 fun CaOperationTitle(
     modifier: Modifier = Modifier,
     operationName: String,
-    balance: String,
-    date: String
+    amount: String,
+    date: String?
 ) {
     Column(
         modifier = modifier.padding(start = margin16())
@@ -57,23 +58,25 @@ fun CaOperationTitle(
                         color = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                     Spacer(modifier = Modifier.height(margin8()))
-                    Text(
-                        text = date,
-                        style = regular12(),
-                        color = MaterialTheme.colorScheme.onSecondaryContainer
-                    )
+                    date?.let {
+                        Text(
+                            text = date,
+                            style = regular12(),
+                            color = MaterialTheme.colorScheme.onSecondaryContainer
+                        )
+                    }
                 }
             }
             Text(
                 modifier = Modifier.padding(end = margin40()),
-                text = balance,
+                text = amount,
                 style = regular14(),
-                color = MaterialTheme.colorScheme.onSecondaryContainer
+                color = MaterialTheme.colorScheme.secondaryContainer
             )
         }
         Divider(
             thickness = 1.dp,
-            color = MaterialTheme.colorScheme.onSecondaryContainer
+            color = MaterialTheme.colorScheme.secondaryContainer
         )
     }
 
@@ -84,10 +87,12 @@ fun CaOperationTitle(
 @Composable
 private fun Preview() {
     CATheme {
-        CaOperationTitle(
-            operationName = "Restaurant Via Pilat",
-            balance = "13450,50 €",
-            date = "24/12/2023"
-        )
+        Surface {
+            CaOperationTitle(
+                operationName = "Restaurant Via Pilat",
+                amount = "13450,50 €",
+                date = "24/12/2023"
+            )
+        }
     }
 }
