@@ -31,14 +31,14 @@ class GetAccountUseCase @Inject constructor(
         val id: String,
         val title: String,
         val amount: String,
-        val category: String,
         val date: String?
     )
 
     operator fun invoke(bankName: String, accountId: String): Flow<AccountData?> {
-        return bankRepository.getBankAccount(bankName, accountId).map { account ->
-            account?.let { convert(it) }
-        }.flowOn(dispatcher)
+        return bankRepository.getBankAccount(bankName, accountId)
+            .map { account ->
+                account?.let { convert(it) }
+            }.flowOn(dispatcher)
     }
 
     @VisibleForTesting
@@ -47,7 +47,6 @@ class GetAccountUseCase @Inject constructor(
             id = data.id,
             title = data.title,
             amount = data.amount,
-            category = data.category,
             date = getDate(data.date)
         )
     }
@@ -58,7 +57,9 @@ class GetAccountUseCase @Inject constructor(
             id = data.id,
             label = data.label,
             balance = "${data.balance} €",
-            operations = data.operations.map { convert(it) }
+            operations = data.operations
+                .sortedWith(compareBy({ it.date }, { it.title }))
+                .map { convert(it) }
         )
     }
 }
