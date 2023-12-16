@@ -2,7 +2,6 @@ package com.antartic.sudio.domain.usecase
 
 import com.antartic.sudio.data.model.account.Account
 import com.antartic.sudio.data.model.bank.Bank
-import com.antartic.sudio.data.model.bank.BankList
 import com.antartic.sudio.data.repository.BankRepositoryImpl
 import com.antartic.sudio.domain.usecases.banks.GetBanksUseCase
 import io.mockk.MockKAnnotations
@@ -40,14 +39,12 @@ class GetBanksUseCaseTest {
 
     @Test
     fun getBanksUseCase_test() = runBlocking {
-        val mock = mockk<BankList>()
         val caBankMock = mockk<Bank>(relaxed = true)
         every { caBankMock.isCA } returns 1
         val otherBankMock = mockk<Bank>(relaxed = true)
         every { otherBankMock.isCA } returns 0
 
-        every { mock.banks } returns listOf(caBankMock, otherBankMock, caBankMock)
-        coEvery { bankRepository.getBanks() } returns flowOf(mock)
+        coEvery { bankRepository.getBanks() } returns flowOf(listOf(caBankMock, otherBankMock, caBankMock))
         getBanksUseCase().collect {
             coVerify { bankRepository.getBanks() }
             assertThat(it.caBanks).hasSize(2)
