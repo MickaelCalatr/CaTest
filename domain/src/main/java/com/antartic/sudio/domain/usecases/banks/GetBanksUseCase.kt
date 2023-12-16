@@ -38,7 +38,7 @@ class GetBanksUseCase @Inject constructor(
 
     operator fun invoke(): Flow<BanksList> {
         return bankRepository.getBanks().map { banks ->
-            val result = banks.banks.map { bank ->
+            val result = banks.map { bank ->
                 convert(bank)
             }
             BanksList(

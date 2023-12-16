@@ -67,8 +67,7 @@ class GetAccountUseCaseTest {
             val result = getAccountUseCase.convert(mock)
 
             assertThat(result.id).isEqualTo(mock.id)
-            assertThat(result.amount).isEqualTo(mock.amount)
-            assertThat(result.category).isEqualTo(mock.category)
+            assertThat(result.amount).isEqualTo("${mock.amount} €")
             assertThat(result.date).isEqualTo(mock.date)
         }
     }

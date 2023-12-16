@@ -46,7 +46,7 @@ class GetAccountUseCase @Inject constructor(
         OperationData(
             id = data.id,
             title = data.title,
-            amount = data.amount,
+            amount = "${data.amount} €",
             date = getDate(data.date)
         )
     }

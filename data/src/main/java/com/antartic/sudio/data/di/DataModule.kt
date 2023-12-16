@@ -17,6 +17,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -26,7 +27,16 @@ object DataModule {
 
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder().build()
+        val logging = HttpLoggingInterceptor().apply {
+            if (BuildConfig.DEBUG) {
+                setLevel(HttpLoggingInterceptor.Level.BASIC)
+            } else {
+                setLevel(HttpLoggingInterceptor.Level.NONE)
+            }
+        }
+        return OkHttpClient.Builder()
+            .addInterceptor(logging)
+            .build()
     }
 
     @Provides
