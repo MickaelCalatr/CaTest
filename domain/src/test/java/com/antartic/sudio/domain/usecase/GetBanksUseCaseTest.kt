@@ -44,7 +44,13 @@ class GetBanksUseCaseTest {
         val otherBankMock = mockk<Bank>(relaxed = true)
         every { otherBankMock.isCA } returns 0
 
-        coEvery { bankRepository.getBanks() } returns flowOf(listOf(caBankMock, otherBankMock, caBankMock))
+        coEvery { bankRepository.getBanks() } returns flowOf(
+            listOf(
+                caBankMock,
+                otherBankMock,
+                caBankMock
+            )
+        )
         getBanksUseCase().collect {
             coVerify { bankRepository.getBanks() }
             assertThat(it.caBanks).hasSize(2)

@@ -3,7 +3,6 @@ package com.antartic.sudio.ui_ds.atoms.text
 import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -14,7 +13,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.antartic.sudio.ui_ds.theme.CATheme
 import com.antartic.sudio.ui_ds.theme.margin10
 import com.antartic.sudio.ui_ds.theme.margin16
-import com.antartic.sudio.ui_ds.theme.margin4
 import com.antartic.sudio.ui_ds.theme.regular14
 
 @Composable

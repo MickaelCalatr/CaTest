@@ -9,7 +9,6 @@ import com.antartic.sudio.data.source.mock.BankMockDataSource
 import com.antartic.sudio.data.source.remote.BankRemoteDataSource
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

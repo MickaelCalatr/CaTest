@@ -6,7 +6,7 @@ import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
 @HiltAndroidApp
-class CATestApplication: Application() {
+class CATestApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         initTimber()
