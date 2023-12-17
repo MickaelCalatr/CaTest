@@ -1,0 +1,20 @@
+android {
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    flavorDimensions += "environment"
+    productFlavors {
+        register("mock") {
+            dimension = "environment"
+            buildConfigField("boolean", "IS_MOCK", "true")
+            buildConfigField("String", "BANK_BASE_URL", "\"https://cdf-test-mobile-default-rtdb.europe-west1.firebasedatabase.app/\"")
+        }
+        register("prod") {
+            dimension = "environment"
+            buildConfigField("boolean", "IS_MOCK", "false")
+            buildConfigField("String", "BANK_BASE_URL", "\"https://cdf-test-mobile-default-rtdb.europe-west1.firebasedatabase.app/\"")
+        }
+    }
+}

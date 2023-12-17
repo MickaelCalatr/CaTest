@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CA Test</string>
+    <string name="my_accounts">My Accounts</string>
+    <string name="ca_bank_title">Credit Agricole</string>
+    <string name="other_bank_title">Other Banks</string>
+    <string name="error_occurred">An error occurred</string>
+</resources>
