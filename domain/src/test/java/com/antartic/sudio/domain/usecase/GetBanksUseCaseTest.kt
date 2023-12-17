@@ -56,12 +56,23 @@ class GetBanksUseCaseTest {
     fun getBanksUseCase_convert_bank_test() {
         runBlocking {
             val mock = mockk<Bank>(relaxed = true)
+            val account1 = mockk<Account>(relaxed = true)
+            every { account1.label } returns "aab"
+            val account2 = mockk<Account>(relaxed = true)
+            every { account2.label } returns "cab"
+            val account3 = mockk<Account>(relaxed = true)
+            every { account3.label } returns "bab"
             every { mock.isCA } returns 1
+            every { mock.accounts } returns listOf(account3, account2, account1)
             val result = getBanksUseCase.convert(mock)
 
             assertThat(result.name).isEqualTo(mock.name)
             assertThat(result.isCA).isTrue
             assertThat(result.accounts).hasSize(mock.accounts.size)
+            assertThat(result.accounts[0].label).isEqualTo("aab")
+            assertThat(result.accounts[1].label).isEqualTo("bab")
+            assertThat(result.accounts[2].label).isEqualTo("cab")
+
         }
     }
 

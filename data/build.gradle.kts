@@ -48,15 +48,17 @@ dependencies {
     // Dagger-Hilt
     implementation("com.google.dagger:hilt-android:2.48")
     kapt("com.google.dagger:hilt-compiler:2.48")
+
+    // JUnit
+    testImplementation("junit:junit:4.13.2")
     // Coroutine test
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
     // MokK
     // Last update has issue https://github.com/mockk/mockk/issues/1168
     testImplementation("io.mockk:mockk:1.13.7")
     testImplementation("io.mockk:mockk-agent-jvm:1.13.7")
     // AssertThat
     testImplementation("org.assertj:assertj-core:3.15.0")
-    testImplementation("junit:junit:4.13.2")
 }
 
 // Allow references to generated code

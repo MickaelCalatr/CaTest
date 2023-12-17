@@ -58,7 +58,7 @@ class GetAccountUseCase @Inject constructor(
             label = data.label,
             balance = "${data.balance} €",
             operations = data.operations
-                .sortedWith(compareBy({ it.date }, { it.title }))
+                .sortedWith(compareByDescending<Operation> { it.date }.thenBy { it.title })
                 .map { convert(it) }
         )
     }

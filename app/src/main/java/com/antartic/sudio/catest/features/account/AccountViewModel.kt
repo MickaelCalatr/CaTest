@@ -26,6 +26,7 @@ class AccountViewModel @Inject constructor(
 
 
     fun getAccount(bankName: String, accountId: String) = launch {
+        _uiState.emit(AccountUiState.Loading)
         getAccountUseCase(bankName, accountId)
             .distinctUntilChanged()
             .asResult()
@@ -33,7 +34,11 @@ class AccountViewModel @Inject constructor(
                 when (it) {
                     is Result.Error -> AccountUiState.Error
                     Result.Loading -> AccountUiState.Loading
-                    is Result.Success -> AccountUiState.Result(it.data)
+                    is Result.Success -> if (it.data != null) {
+                        AccountUiState.Result(it.data)
+                    } else {
+                        AccountUiState.Error
+                    }
                 }
             }
             .collect { _uiState.emit(it) }
@@ -43,6 +48,6 @@ class AccountViewModel @Inject constructor(
 sealed interface AccountUiState {
     object Error : AccountUiState
     object Loading : AccountUiState
-    data class Result(val data: GetAccountUseCase.AccountData?) : AccountUiState
+    data class Result(val data: GetAccountUseCase.AccountData) : AccountUiState
 }
 

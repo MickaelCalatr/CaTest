@@ -83,13 +83,13 @@ fun AccountScreen(
                 ) {
                     Text(
                         modifier = Modifier.padding(vertical = margin16()),
-                        text = uiState.data?.balance.orEmpty(),
+                        text = uiState.data.balance,
                         color = MaterialTheme.colorScheme.onBackground,
                         style = bold40()
                     )
                     Text(
                         modifier = Modifier.padding(vertical = margin16()),
-                        text = uiState.data?.label.orEmpty(),
+                        text = uiState.data.label,
                         color = MaterialTheme.colorScheme.onBackground,
                         style = regular22()
                     )
@@ -98,16 +98,14 @@ fun AccountScreen(
                             .fillMaxSize()
                             .background(MaterialTheme.colorScheme.background)
                     ) {
-                        if (!uiState.data?.operations.isNullOrEmpty()) {
-                            items(
-                                items = uiState.data!!.operations
-                            ) {
-                                CaOperationTitle(
-                                    operationName = it.title,
-                                    amount = it.amount,
-                                    date = it.date
-                                )
-                            }
+                        items(
+                            items = uiState.data.operations
+                        ) {
+                            CaOperationTitle(
+                                operationName = it.title,
+                                amount = it.amount,
+                                date = it.date
+                            )
                         }
                     }
                 }
