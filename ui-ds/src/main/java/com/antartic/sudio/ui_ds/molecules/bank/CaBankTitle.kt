@@ -24,7 +24,6 @@ import com.antartic.sudio.ui_ds.theme.margin12
 import com.antartic.sudio.ui_ds.theme.margin16
 import com.antartic.sudio.ui_ds.theme.margin8
 import com.antartic.sudio.ui_ds.theme.regular14
-import com.antartic.sudio.ui_ds.theme.regular16
 
 @Composable
 fun CaBankTitle(

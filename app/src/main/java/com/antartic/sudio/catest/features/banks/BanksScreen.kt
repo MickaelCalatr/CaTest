@@ -28,7 +28,6 @@ import com.antartic.sudio.ui_ds.atoms.text.CaErrorPlaceholder
 import com.antartic.sudio.ui_ds.molecules.account.CaAccountTitle
 import com.antartic.sudio.ui_ds.molecules.bank.CaBankTitle
 import com.antartic.sudio.ui_ds.theme.CATheme
-import com.antartic.sudio.ui_ds.theme.bold22
 import com.antartic.sudio.ui_ds.theme.bold40
 import com.antartic.sudio.ui_ds.theme.margin16
 import com.antartic.sudio.ui_ds.theme.margin28
@@ -78,10 +77,7 @@ fun BanksScreen(
                     item {
                         CABankTitleText(text = stringResource(R.string.ca_bank_title))
                     }
-                    items(
-                        items = uiState.data.caBanks!!,
-                        key = { it.name + it.accounts }
-                    ) {
+                    items(items = uiState.data.caBanks!!) {
                         BankSection(
                             bank = it,
                             onItemClick = { id ->
@@ -94,10 +90,7 @@ fun BanksScreen(
                     item {
                         CABankTitleText(text = stringResource(R.string.other_bank_title))
                     }
-                    items(
-                        items = uiState.data.otherBanks!!,
-                        key = { it.name + it.accounts }
-                    ) {
+                    items(items = uiState.data.otherBanks!!) {
                         BankSection(
                             bank = it,
                             onItemClick = { id ->

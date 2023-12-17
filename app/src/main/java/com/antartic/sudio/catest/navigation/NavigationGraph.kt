@@ -21,6 +21,7 @@ fun NavigationGraph(navController: NavHostController) {
     ) {
         composable(route = NavigationItems.BankPage.screenRoute) {
             BanksRoute(
+                viewModel = hiltViewModel(),
                 navigateToAccount = { bankName, accountId ->
                     navController.navigate("bank/$bankName/account/$accountId")
                 }
