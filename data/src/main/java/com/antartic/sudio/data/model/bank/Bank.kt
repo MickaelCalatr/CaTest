@@ -1,7 +1,7 @@
 package com.antartic.sudio.data.model.bank
 
-import com.google.gson.annotations.SerializedName
 import com.antartic.sudio.data.model.account.Account
+import com.google.gson.annotations.SerializedName
 
 data class Bank(
     @SerializedName("name")

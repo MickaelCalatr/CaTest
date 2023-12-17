@@ -48,23 +48,20 @@ fun CaOperationTitle(
                     .padding(horizontal = margin8())
                     .weight(1f)
             ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
+                Text(
+                    text = operationName,
+                    style = bold14(),
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+                Spacer(modifier = Modifier.height(margin8()))
+                date?.let {
                     Text(
-                        text = operationName,
-                        style = bold14(),
-                        textAlign = TextAlign.Center,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                        modifier = Modifier.padding(start = margin16()),
+                        text = date,
+                        style = regular12(),
+                        color = MaterialTheme.colorScheme.onSecondaryContainer
                     )
-                    Spacer(modifier = Modifier.height(margin8()))
-                    date?.let {
-                        Text(
-                            text = date,
-                            style = regular12(),
-                            color = MaterialTheme.colorScheme.onSecondaryContainer
-                        )
-                    }
                 }
             }
             Text(

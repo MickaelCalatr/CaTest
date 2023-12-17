@@ -1,7 +1,7 @@
 package com.antartic.sudio.data.model.account
 
-import com.google.gson.annotations.SerializedName
 import com.antartic.sudio.data.model.operation.Operation
+import com.google.gson.annotations.SerializedName
 
 data class Account(
     @SerializedName("order")
