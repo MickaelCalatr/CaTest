@@ -75,9 +75,17 @@ dependencies {
 
     // Junit
     testImplementation("junit:junit:4.13.2")
+    // AssertThat
+    testImplementation("org.assertj:assertj-core:3.15.0")
     // MokK
     testImplementation("io.mockk:mockk:1.13.8")
     testImplementation("io.mockk:mockk-agent-jvm:1.13.8")
+    // Test Turbine
+    testImplementation("app.cash.turbine:turbine:1.0.0")
+    // Robolectric
+    testImplementation("org.robolectric:robolectric:4.11.1")
+    // Coroutine test
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
 }
 
 // Allow references to generated code
